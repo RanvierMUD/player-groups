@@ -2,7 +2,7 @@
 
 const Ranvier = require('ranvier');
 const { Broadcast: B, CommandManager } = Ranvier;
-const { CommandParser } = Ranvier.CommandParser;
+const { CommandParser: Parser } = Ranvier.CommandParser;
 const say = B.sayAt;
 
 const subcommands = new CommandManager();
