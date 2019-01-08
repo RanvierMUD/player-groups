@@ -1,8 +1,7 @@
 'use strict';
 
-const Ranvier = require('ranvier');
-const { Broadcast } = Ranvier;
-const { CommandParser } = Ranvier.CommandParser;
+const { Broadcast } = require('ranvier');
+const ArgParser = require('../../bundle-example-lib/lib/ArgParser');
 
 module.exports = {
   command: state => (arg, player) => {
@@ -10,7 +9,7 @@ module.exports = {
       return Broadcast.sayAt(player, 'Ditch whom?');
     }
 
-    let target = CommandParser.parseDot(arg, player.followers);
+    let target = ArgParser.parseDot(arg, player.followers);
 
     if (!target) {
       return Broadcast.sayAt(player, "They aren't following you.");
