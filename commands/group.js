@@ -123,20 +123,6 @@ subcommands.add({
 });
 
 subcommands.add({
-  name: 'leave',
-  command: state => (args, player) => {
-    if (!player.party) {
-      return say(player, "You're not in a group.");
-    }
-
-    const party = player.party;
-    player.party.delete(player);
-    say(party, `<b><green>${player.name} left the group.</green></b>`);
-    say(player, '<b><green>You leave the group.</green></b>');
-  }
-});
-
-subcommands.add({
   name: 'list',
   command: state => (args, player) => {
     if (!player.party) {
@@ -151,6 +137,24 @@ subcommands.add({
       }
       say(player, `<b><green>${tag} ${member.name}</green></b>`);
     }
+  }
+});
+
+subcommands.add({
+  name: 'leave',
+  command: state => (args, player) => {
+    if (!player.party) {
+      return say(player, "You're not in a group.");
+    }
+
+    if (player === player.party.leader) {
+      return say(player, "You have to disband if you want to leave the group.");
+    }
+
+    const party = player.party;
+    player.party.delete(player);
+    say(party, `<b><green>${player.name} left the group.</green></b>`);
+    say(player, '<b><green>You leave the group.</green></b>');
   }
 });
 
